@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exemplo de consumo de API com JavaScript</title>
+</head>
+<body>
+  <h1>Mensagens agendadas</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Mensagem</th>
+        <th>Horário</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+    </tbody>
+  </table>
+
+  <script>
+    // Faz uma requisição GET para a API e preenche a tabela com os dados recebidos
+    function atualizaTabela() {
+      fetch('http://localhost:3000/mensagens')
+        .then(response => response.json())
+        .then(data => {
+          const tableBody = document.getElementById('table-body');
+          tableBody.innerHTML = '';
+          data.forEach(mensagem => {
+            const row = tableBody.insertRow();
+            row.innerHTML = `
+              <td>${mensagem.numero}</td>
+              <td>${mensagem.mensagem}</td>
+              <td>${mensagem.horario}</td>
+            `;
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    // Adiciona uma mensagem na lista
+    function adicionaMensagem() {
+      const numero = document.getElementById('numero').value;
+      const mensagem = document.getElementById('mensagem').value;
+
+      fetch('http://localhost:3000/mensagens', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ numero, mensagem })
+      })
+        .then()
+        .then(data => {
+          //console.log(data);
+          atualizaTabela();
+        })
+        .catch(error => console.error(error));
+    }
+
+    // Atualiza a tabela assim que a página carrega
+    window.onload = function() {
+      atualizaTabela();
+    }
+  </script>
+
+  <h2>Nova mensagem</h2>
+  <form onsubmit="adicionaMensagem(); return false;">
+    <label for="numero">Número:</label>
+    <input type="text" id="numero" required><br>
+
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" required></textarea><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>
