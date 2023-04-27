@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "twilio": "^4.10.0"
+  },
+  "name": "marketing-services",
+  "description": "Api de gerenciamento de sistema de marketing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dnrocha13/marketing-services.git#marketing-services"
+  },
+  "author": "Diego",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dnrocha13/marketing-services/issues"
+  },
+  "homepage": "https://github.com/Dnrocha13/marketing-services/tree/marketing-services#readme"
+}
